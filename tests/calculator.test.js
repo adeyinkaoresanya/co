@@ -1,29 +1,45 @@
-const Calculator = require('../src/calculator');
+const { Calculator, DivisionByZeroError } = require('../src/calculator');
 
 describe('Calculator', () => {
-    let calc;
+    let calculator;
 
     beforeEach(() => {
-        calc = new Calculator();
+        calculator = new Calculator();
     });
 
     test('adds two numbers', () => {
-        expect(calc.add(5, 3)).toBe(8);
+        expect(calculator.add(5, 3)).toBe(8);
     });
 
     test('subtracts two numbers', () => {
-        expect(calc.subtract(10, 4)).toBe(6);
+        expect(calculator.subtract(10, 4)).toBe(6);
     });
 
     test('multiplies two numbers', () => {
-        expect(calc.multiply(6, 2)).toBe(12);
+        expect(calculator.multiply(6, 2)).toBe(12);
     });
 
     test('divides two numbers', () => {
-        expect(calc.divide(15, 3)).toBe(5);
+        expect(calculator.divide(15, 3)).toBe(5);
     });
 
     test('throws error when dividing by zero', () => {
-        expect(() => calc.divide(10, 0)).toThrow(Error);
+        expect(() => calculator.divide(10, 0)).toThrow(DivisionByZeroError);
+    });
+
+    test('calculates power of a number', () => {
+        expect(calculator.power(2, 3)).toBe(8);
+    });
+    
+    test('calculates square root of a number', () => {
+        expect(calculator.sqrt(16)).toBe(4);
+    });
+    
+    test('throws error for square root of negative number', () => {
+        expect(() => calculator.sqrt(-1)).toThrow(RangeError);
+    });
+    
+    test('calculates percentage', () => {
+        expect(calculator.percentage(200, 10)).toBe(20);
     });
 });
